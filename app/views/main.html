@@ -7,12 +7,12 @@
   <h3 class="text-muted">rankeditor</h3>
 </div>
 
-
+<!-- search and filter box and select -->
 <div class="container" ng-controller="MainCtrl">
-  <div style="border 3px solid rgba(122, 127, 114, 0.74);">
+  <div style="border: 3px solid rgba(122, 127, 114, 0.74); margin: 5px; height: ">
     <div>
-        <input type='text' ng-model="search.$">
-        <select ng-model="search.country">
+        <input type='text' class="form input-small" ng-model="search.$">
+        <select ng-model="search.Country" class="btn">
             <option value="">all</option>
             <option value="Colombia">Colombia</option>
             <option value="Bolivia">Bolivia</option>
@@ -22,12 +22,28 @@
             <option value="Mexico">Mexico</option>
             <option value="Costa Rica">Costa Rica</option>
         </select>
+        <button class= "btn" ng-click="export()" >export to csv file</button>
+
+
+
+               <!-- for when I want to implement uploading photos-->
+
+      <div class="control-group">
+          <label class="control-label" for="filebutton">upload</label>
+          <div class="controls">
+              <input  name="filebutton" id="file"class="input-file" type="file" ng-model="csvFile">
+              <button class= "btn" ng-click="add()" >import csv file</button>  <!--  ng click was import(csvFile) -->
+              <button class= "btn" ng-click="duplicate(IEs)" >Fix records</button>
+          </div>
+      </div>
+
     </div>
+
    </div> 
     <div style="overflow:auto; width:300px;" class="ieDiv"  ng-repeat="ie in IEs | filter:search track by $index">  
           <b style="float:left;">{{ie.ieName}} </b> <br>
           <div style="width:184px; float:left;">  New rank: {{ie.newLifetime}}</div><br>
-        <div style="float:left;">market: {{ie.country}}  </div>
+        <div style="float:left;">market: {{ie.Country}}  </div>
     </div>
 
 </div>

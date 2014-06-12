@@ -60,14 +60,19 @@ function CSVToArray(strData, strDelimiter) {
     return (arrData);
 }
 
-
+        // this duplicate function copies the objects with a newLifetime property greater than 1.  //
     return {
     		duplicate: function(list) {
                 var originalLength = list.length;
                 console.log("original length was:", originalLength)
     			for (var k = 0; k < originalLength; k++) {
                         // set the newRank property to a number and get rid of the text
-                        if(list[k].newLifetime) {list[k].newLifetime = parseInt(list[k].newLifetime[0])
+                        if(list[k].newLifetime != null) {                       // check if 10 star
+                            if (list[k].newLifetime[1] == 0) {        
+                                list[k].newLifetime = 10;
+                            }else {
+                            list[k].newLifetime = parseInt(list[k].newLifetime[0]);
+                        }
                         }
     				if (list[k].numAdvancements > 1) {
 
@@ -83,7 +88,7 @@ function CSVToArray(strData, strDelimiter) {
 
 
                                 
-                                    list.push(
+                                    list.push(                      // was just push   need to change back because it is copying the first item over and over.
                                         {
                                         ieNum: list[k].ieNum,
                                         ieName: list[k].ieName,
